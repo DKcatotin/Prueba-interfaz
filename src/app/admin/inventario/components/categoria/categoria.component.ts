@@ -21,7 +21,7 @@ export class CategoriaComponent {
   activeIndex: number = 0;
 
   constructor() {
-    // Definir las imágenes para la galería
+    
     this.images = [
       {
         itemImageSrc: 'https://via.placeholder.com/600x400',
@@ -45,7 +45,7 @@ export class CategoriaComponent {
       }
     ];
 
-    // Opciones para el comportamiento responsivo
+    
     this.responsiveOptions = [
       {
         breakpoint: '1024px',
@@ -65,14 +65,14 @@ export class CategoriaComponent {
     ];
   }
 
-  // Función para ir al siguiente elemento
+  
   next() {
     if (this.activeIndex < this.images.length - 1) {
       this.activeIndex++;
     }
   }
 
-  // Función para ir al anterior elemento
+  
   prev() {
     if (this.activeIndex > 0) {
       this.activeIndex--;
