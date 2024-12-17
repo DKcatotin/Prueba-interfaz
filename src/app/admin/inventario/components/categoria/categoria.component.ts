@@ -15,104 +15,67 @@ interface Categoria{
   styleUrl: './categoria.component.scss',
   
 })
-export class CategoriaComponent implements OnInit {
+export class CategoriaComponent {
+  images: any[];
+  responsiveOptions: any[];
+  activeIndex: number = 0;
 
-  private categoriaService = inject(CategoriaService)
-  categorias: Categoria[] = []
-  dialog_visible: boolean=false;
-  categoria_id:number=-1;
-  categoriaForm=new FormGroup({
-    nombre:new FormControl(''),
-    detalle: new FormControl('')
-  });
-
-  ngOnInit():void{
-    this.getCategorias()
-  }
-  getCategorias(){
-    this.categoriaService.funlistar().subscribe(
-      (res:any)=>{
-        this.categorias = res
+  constructor() {
+    // Definir las imágenes para la galería
+    this.images = [
+      {
+        itemImageSrc: 'https://via.placeholder.com/600x400',
+        thumbnailImageSrc: 'https://via.placeholder.com/100x100'
       },
-      (error:any)=>{
-        console.log(error)
-      }
-    )
-}
-mostrarDialog(){
-this.dialog_visible=true
-}
-guardarCategoria(){
-  if(this.categoria_id>0)
-    {
-    this.categoriaService.funModificar(this.categoria_id, this.categoriaForm.value).subscribe
-      (
-        (res:any)=>{
-          this.dialog_visible=false;
-          this.getCategorias();
-          this.categoria_id=-1;
-          this.alerta("Actualizado","la categoria se modifico con exito","success")
-        },
-        (error:any)=>{
-          this.alerta("Error Al Actualizar","verifica los datos","error")
-        }
-  
-      );
-      this.categoriaForm.reset();
-    }
-  else
-    {
-      this.categoriaService.funGuardar(this.categoriaForm.value).subscribe 
-      (
-        (res:any)=>
-          {
-          this.dialog_visible=false
-          this.getCategorias();
-          this.alerta("Registrado","La categoria se creo con exito","success")
-        }
-      ),
-        (error:any)=>{
-          this.alerta("Error al registro","verifica los datos","error")
-      
-        }
-        this.categoriaForm.reset();   
-    }
-}
-
-editarCategoria(cat:Categoria){
-  this.dialog_visible=true
-  this.categoria_id=cat.id
-  this.categoriaForm.setValue({nombre: cat.nombre,detalle: cat.detalle})
-}
-eliminarCategoria(cat:Categoria){
-Swal.fire({
-  title: '¿Estas seguro de eliminar la categoria?',
-  text:"una vez eliminada no se podra recuperar!",
-  icon:"warning",
-  showCancelButton: true,
-  confirmButtonColor:"#3085d6",
-  cancelButtonColor:"#d33",
-  confirmButtonText: "Si, eliminarla",
-}).then((result)=>{
-  if(result.isConfirmed) {
-    this.categoriaService.funEliminar(cat.id).subscribe(
-      (res:any)=>{
-       this.alerta("Eliminado","Categoria eliminaa","success")
-
-        this.getCategorias();
-        this.categoria_id=-1
+      {
+        itemImageSrc: 'https://via.placeholder.com/600x400/ff5733',
+        thumbnailImageSrc: 'https://via.placeholder.com/100x100/ff5733'
       },
-      (error:any)=>{
-        this.alerta("Error!","Erro al intentar eliminar.","success")
+      {
+        itemImageSrc: 'https://via.placeholder.com/600x400/33c4ff',
+        thumbnailImageSrc: 'https://via.placeholder.com/100x100/33c4ff'
+      },
+      {
+        itemImageSrc: 'https://via.placeholder.com/600x400/ffb833',
+        thumbnailImageSrc: 'https://via.placeholder.com/100x100/ffb833'
+      },
+      {
+        itemImageSrc: 'https://via.placeholder.com/600x400/8cff33',
+        thumbnailImageSrc: 'https://via.placeholder.com/100x100/8cff33'
       }
-    )
+    ];
+
+    // Opciones para el comportamiento responsivo
+    this.responsiveOptions = [
+      {
+        breakpoint: '1024px',
+        numVisible: 3,
+        numScroll: 3
+      },
+      {
+        breakpoint: '768px',
+        numVisible: 2,
+        numScroll: 2
+      },
+      {
+        breakpoint: '480px',
+        numVisible: 1,
+        numScroll: 1
+      }
+    ];
   }
-});
-}
-alerta(title:string, text:string, icon:'success'|'error'|'info'|'question'){
-  Swal.fire({title,text,icon});
-  //title:title
-  //text:text 
-  //icon.icon
-}
+
+  // Función para ir al siguiente elemento
+  next() {
+    if (this.activeIndex < this.images.length - 1) {
+      this.activeIndex++;
+    }
+  }
+
+  // Función para ir al anterior elemento
+  prev() {
+    if (this.activeIndex > 0) {
+      this.activeIndex--;
+    }
+  }
 }

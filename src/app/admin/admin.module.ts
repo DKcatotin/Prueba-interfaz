@@ -16,7 +16,7 @@ import { ButtonModule } from 'primeng/button';
 @NgModule({
   declarations: [
     ClienteComponent,
-    PerfilComponent,
+    
     LayoutComponent
   ],
   imports: [
@@ -24,7 +24,6 @@ import { ButtonModule } from 'primeng/button';
     AdminRoutingModule,
     AppLayoutModule,
     TableModule,
-    InventarioModule,
     CarouselModule,
     CardModule,
     ButtonModule

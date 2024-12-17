@@ -7,14 +7,18 @@ import { TableModule } from 'primeng/table';
 import { DialogModule } from 'primeng/dialog';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {ToolbarModule} from 'primeng/toolbar'
 import { FileUploadModule } from 'primeng/fileupload';
 import { RatingModule } from 'primeng/rating';
+import { PerfilComponent } from '../components/perfil/perfil.component';
+import { CardModule } from 'primeng/card';
+import { GalleriaModule } from 'primeng/galleria'; 
 @NgModule({
   declarations: [
     ProductoComponent,
-    CategoriaComponent
+    CategoriaComponent,
+    PerfilComponent
   ],
   imports: [
     CommonModule,
@@ -27,6 +31,9 @@ import { RatingModule } from 'primeng/rating';
     ToolbarModule,
     FileUploadModule,
     RatingModule,
+    FormsModule,
+    CardModule,
+    GalleriaModule 
   ]
 })
 export class InventarioModule { }
