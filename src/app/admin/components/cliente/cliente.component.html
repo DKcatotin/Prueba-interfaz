@@ -1,0 +1,25 @@
+<!-- Carrusel de imágenes -->
+<p-carousel [value]="images" [numVisible]="1" [circular]="true">
+    <ng-template let-image pTemplate="item">
+      <div style="display: flex; justify-content: center; align-items: center; height: 100%;">
+        <img [src]="image" alt="Image" style="width: 50%;">
+      </div>
+    </ng-template>
+  </p-carousel>
+  
+  <!-- Tarjetas con botones -->
+  <div class="card-container" style="display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center;">
+    <div *ngFor="let card of cards" class="card" style="flex: 1 1 calc(33.33% - 1rem); box-sizing: border-box; max-width: 300px;">
+      <p-card [header]="card.header" [subheader]="card.subheader">
+        <ng-template pTemplate="content">
+          <img [src]="card.image" alt="Imagen de la tarjeta" style="max-width: 100%; height: auto;">
+          <p>{{ card.description }}</p>
+        </ng-template>
+        <ng-template pTemplate="footer">
+          <button type="button" pButton label="Aceptar" class="p-button-success p-button-lg"></button>
+          <button type="button" pButton label="Cancelar" class="p-button-danger p-button-lg"></button>
+        </ng-template>
+      </p-card>
+    </div>
+  </div>
+  
